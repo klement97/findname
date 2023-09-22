@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+
+  web:
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - ./src:/src
+    ports:
+      - "8000:80"
+  
+  es:
+    image: elastic/elasticsearch:8.10.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false # would make things complicated; no auth
+    ports:
+      - '9200:9200'
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.10.2
+    environment:
+      SERVERNAME: 'kibana'
+      ELASTICSEARCH_HOSTS: 'http://elasticsearch:9200'
+      server.publicBaseUrl: 'http://localhost:5601'
+      INTERACTIVESETUP_ENABLED: 'false'
+    ports:
+      - '5601:5601'
+    depends_on:
+      - es
+    volumes:
+      - kibanadata:/usr/share/kibana/data
+
+volumes:
+  esdata:
+  kibanadata:
