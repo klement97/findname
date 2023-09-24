@@ -1,9 +1,9 @@
 FROM python:3.11-slim
 
-WORKDIR /src
+WORKDIR /app
 
 COPY requirements.txt .
 RUN pip install -U pip
 RUN pip install -r requirements.txt
-COPY src/ .
-CMD uvicorn infra.fastapi:app --host 0.0.0.0 --port 80 --reload
+COPY . .
+CMD uvicorn src.infra.fastapi:app --host 0.0.0.0 --port 80 --reload

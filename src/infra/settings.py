@@ -1,6 +1,6 @@
 import os
 
-from infra.config import AppEnv
+from src.infra.config import AppEnv
 
 APP_ENV = os.getenv('APP_ENV', AppEnv.DEV)
 DEBUG = APP_ENV == AppEnv.DEV

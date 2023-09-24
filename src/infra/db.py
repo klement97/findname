@@ -1,8 +1,6 @@
 import logging
-from typing import Any, Optional, Union
 
-from elastic_transport import AiohttpHttpNode as ESAiohttpHttpNode, HttpHeaders
-from elastic_transport._models import DEFAULT, DefaultType
+from elastic_transport import AiohttpHttpNode as ESAiohttpHttpNode
 from elasticsearch import AsyncElasticsearch
 
 logger = logging.getLogger(__name__)
@@ -24,6 +22,8 @@ class AiohttpHttpNode(ESAiohttpHttpNode):
 
 class Database:
     def __init__(self, address, config):
+        print(f"address: {address}")
+        print(f"config: {config}")
         self.client = AsyncElasticsearch([address], **config)
 
     async def close(self):

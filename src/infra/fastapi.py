@@ -5,6 +5,8 @@ from starlette.responses import JSONResponse
 
 from . import settings
 from .exception_handling import EXCEPTION_MAP
+from src.infra.routers.cars import router as cars_router
+from ..containers import container
 
 logging.basicConfig(
     level="INFO",
@@ -19,6 +21,7 @@ app = FastAPI(
     version=settings.VERSION,
     docs_url='/docs',
 )
+app.include_router(cars_router, prefix='/cars', tags=['cars'])
 
 
 @app.get("/health-check")
@@ -36,4 +39,4 @@ for exception_class, handler in EXCEPTION_MAP.items():
 
 @app.on_event('startup')
 async def startup():
-    pass
+    container.wire(packages=['src'])
