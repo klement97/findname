@@ -25,9 +25,3 @@ class Database:
         print(f"address: {address}")
         print(f"config: {config}")
         self.client = AsyncElasticsearch([address], **config)
-
-    async def close(self):
-        await self.client.close()
-
-    async def connect(self):
-        await self.client.ping()
