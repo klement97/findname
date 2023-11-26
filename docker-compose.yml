@@ -17,6 +17,7 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false # would make things complicated; no auth
+      - ES_JAVA_OPTS=-Xms750m -Xmx750m
     ports:
       - '9200:9200'
     volumes:
