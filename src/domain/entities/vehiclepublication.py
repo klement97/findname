@@ -1,43 +1,71 @@
 from dataclasses import dataclass
-from typing import Literal, Any
+from typing import Any
 from uuid import UUID
+
+from src.domain.entities.enums import PublisherType, VehicleType, TransmissionType, DriveType
 
 
 @dataclass
-class Info:
-    type: Literal["dealer", "private"]
+class Publisher:
+    type: PublisherType
     full_name: str
     phone: str
 
 
 @dataclass
-class VehicleDetails:
-    vin: str
-    year: int
+class BaseVehicleDetails:
+    price: int
     make: str
     model: str
-    transmission: Literal["automatic", "manual"]
-    kms: int
     description: str
-    is_modified: bool
     location: str
+
+
+@dataclass
+class CarDetails(BaseVehicleDetails):
+    vin: str
+    year: int
+    transmission: TransmissionType
+    kms: int
     engine: str
-    body_style: str
     fuel_type: str
-    drive_type: Literal["fwd", "rwd", "awd"]
+    drive_type: DriveType
     exterior_color: str
     interior_color: str
-    days_on_action: int = 7
+
+
+@dataclass
+class MotorcycleDetails(BaseVehicleDetails):
+    vin: str
+    year: int
+    transmission: TransmissionType
+    kms: int
+    engine: str
+    color: str
+
+
+@dataclass
+class BicycleDetails(BaseVehicleDetails):
+    pass
 
 
 @dataclass
 class VehiclePublication:
     id: UUID
-    info: Info
-    vehicle_details: VehicleDetails
+    publisher: Publisher
+    type: VehicleType
+    details: {
+        VehicleType.CAR: CarDetails | None,
+        VehicleType.MOTORCYCLE: MotorcycleDetails | None,
+        VehicleType.BICYCLE: BicycleDetails | None,
+        VehicleType.VAN: CarDetails | None,
+        VehicleType.TRUCK: CarDetails | None,
+        VehicleType.BUS: CarDetails | None,
+        VehicleType.RECREATIONAL: CarDetails | None,
+        VehicleType.BOAT: CarDetails | None,
+    }
     created_at: str
     updated_at: str
 
-    reserve_price: float | None = None
     photos: list[str] | None = None
     comments: dict[str, Any] | None = None
