@@ -11,7 +11,7 @@ class Info:
 
 
 @dataclass
-class CarDetails:
+class VehicleDetails:
     vin: str
     year: int
     make: str
@@ -31,10 +31,10 @@ class CarDetails:
 
 
 @dataclass
-class Car:
+class VehiclePublication:
     id: UUID
     info: Info
-    car_details: CarDetails
+    vehicle_details: VehicleDetails
     created_at: str
     updated_at: str
 
