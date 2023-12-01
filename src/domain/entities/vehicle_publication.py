@@ -49,21 +49,15 @@ class BicycleDetails(BaseVehicleDetails):
     pass
 
 
+DetailsType = CarDetails | MotorcycleDetails | BicycleDetails
+
+
 @dataclass
 class VehiclePublication:
     id: UUID
     publisher: Publisher
     type: VehicleType
-    details: {
-        VehicleType.CAR: CarDetails | None,
-        VehicleType.MOTORCYCLE: MotorcycleDetails | None,
-        VehicleType.BICYCLE: BicycleDetails | None,
-        VehicleType.VAN: CarDetails | None,
-        VehicleType.TRUCK: CarDetails | None,
-        VehicleType.BUS: CarDetails | None,
-        VehicleType.RECREATIONAL: CarDetails | None,
-        VehicleType.BOAT: CarDetails | None,
-    }
+    details: DetailsType
     created_at: str
     updated_at: str
 

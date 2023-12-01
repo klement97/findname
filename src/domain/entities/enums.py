@@ -1,28 +1,28 @@
-from enum import StrEnum
+from enum import auto, StrEnum
 
 
 class PublisherType(StrEnum):
-    DEALER = "dealer"
-    PRIVATE = "private"
+    DEALER = auto()
+    PRIVATE = auto()
 
 
 class VehicleType(StrEnum):
-    CAR = "car"
-    MOTORCYCLE = "motorcycle"
-    BICYCLE = "bicycle"
-    VAN = "van"
-    TRUCK = "truck"
-    BUS = "bus"
-    RECREATIONAL = "recreational"
-    BOAT = "boat"
+    CAR = auto()
+    MOTORCYCLE = auto()
+    BICYCLE = auto()
+    VAN = auto()
+    TRUCK = auto()
+    BUS = auto()
+    RECREATIONAL = auto()
+    BOAT = auto()
 
 
 class TransmissionType(StrEnum):
-    AUTOMATIC = "automatic"
-    MANUAL = "manual"
+    AUTOMATIC = auto()
+    MANUAL = auto()
 
 
 class DriveType(StrEnum):
-    FWD = "fwd"
-    RWD = "rwd"
-    AWD = "awd"
+    FWD = auto()
+    RWD = auto()
+    AWD = auto()

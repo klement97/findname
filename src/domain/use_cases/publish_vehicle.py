@@ -1,5 +1,5 @@
 from src.adapters.repos.vehicle import VehicleRepo
-from src.domain.entities.vehiclepublication import VehiclePublication
+from src.domain.entities.vehicle_publication import VehiclePublication
 from src.domain.ports.use_case import UseCasePort
 
 
