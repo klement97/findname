@@ -4,7 +4,7 @@ from elasticsearch import AsyncElasticsearch
 
 
 class RepoPort(ABC):
-    cars_index = 'cars'
+    vehicles_index = 'vehicles'
 
     def __init__(self, client: AsyncElasticsearch):
         self.client = client

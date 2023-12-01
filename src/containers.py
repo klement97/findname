@@ -3,8 +3,8 @@ import os
 
 from dependency_injector import containers, providers
 
-from src.adapters.repos.car import CarRepo
-from src.domain.use_cases.publish_car import PublishCarUseCase
+from src.adapters.repos.vehicle import VehicleRepo
+from src.domain.use_cases.publish_vehicle import PublishVehicleUseCase
 from src.infra.db import Database, AiohttpHttpNode
 
 
@@ -30,14 +30,14 @@ class Container(containers.DeclarativeContainer):
         },
     )
 
-    car_repo = providers.Factory(
-        CarRepo,
+    vehicle_repo = providers.Factory(
+        VehicleRepo,
         client=db.provided.client
     )
 
-    publish_car_use_case = providers.Factory(
-        PublishCarUseCase,
-        car_repo=car_repo,
+    publish_vehicle_use_case = providers.Factory(
+        PublishVehicleUseCase,
+        vehicle_repo=vehicle_repo,
     )
 
 
