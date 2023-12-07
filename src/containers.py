@@ -25,7 +25,7 @@ class Container(containers.DeclarativeContainer):
             "node_class": AiohttpHttpNode,
             "request_timeout": 100,
             "basic_auth": (es_user, es_password) if es_user else None,
-            "verify_certs": False,
+            "verify_certs": verify_certs,
             "ca_certs": ca_certs,
         },
     )
