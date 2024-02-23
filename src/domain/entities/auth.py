@@ -1,5 +1,5 @@
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from datetime import datetime, timedelta
 
 from jose import jwt
@@ -36,6 +36,12 @@ class User:
     id: uuid.UUID = field(default_factory=uuid.uuid4)
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)
+
+    def get_public_info(self):
+        d = asdict(self)
+        d.pop("password")
+
+        return d
 
     def hash_password(self):
         self.password = pwd_context.hash(self.password)
