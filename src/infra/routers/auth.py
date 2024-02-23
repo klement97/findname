@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
 from src.domain.entities.auth import SignupData, LoginData
-from src.domain.use_cases.login import LoginUseCase
-from src.domain.use_cases.read_user_info import ReadUserInfoUseCase
-from src.domain.use_cases.signup import SignupUseCase
+from src.domain.use_cases.auth.login import LoginUseCase
+from src.domain.use_cases.auth.read_user_info import ReadUserInfoUseCase
+from src.domain.use_cases.auth.signup import SignupUseCase
 from src.infra import dependencies as deps
 
 router = APIRouter()
