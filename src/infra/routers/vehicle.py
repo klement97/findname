@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from src.domain.entities.vehicle_publication import VehiclePublication
-from src.domain.use_cases.publish_vehicle import PublishVehicleUseCase
+from src.domain.use_cases.vehicle.publish_vehicle import PublishVehicleUseCase
 from src.infra.dependencies import publish_vehicle_use_case
 
 router = APIRouter()

@@ -10,7 +10,7 @@ from src.adapters.repos.vehicle import VehicleRepo
 from src.domain.use_cases.auth.login import LoginUseCase
 from src.domain.use_cases.auth.read_user_info import ReadUserInfoUseCase
 from src.domain.use_cases.auth.signup import SignupUseCase
-from src.domain.use_cases.publish_vehicle import PublishVehicleUseCase
+from src.domain.use_cases.vehicle.publish_vehicle import PublishVehicleUseCase
 from src.infra import config
 from src.infra.db import Database, AiohttpHttpNode
 
