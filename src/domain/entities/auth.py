@@ -51,7 +51,7 @@ class User:
 
     def create_access_token(self, expires_delta: timedelta | None = None):
         expires_delta = expires_delta or timedelta(minutes=config.ACCESS_TOKEN_EXPIRE_MINUTES)
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.now() + expires_delta
         to_encode = {
             "sub": self.email,
             "exp": expire,
