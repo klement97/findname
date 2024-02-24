@@ -11,6 +11,7 @@ class LoginUseCase(UseCasePort):
     async def execute(self, login_data: LoginData):
         user = await self.repo.get(email=login_data.email)
         if not user:
+            # todo: hash password here to remove time difference
             raise IncorrectCredentialsException()
 
         if not user.verify_password(login_data.password):
