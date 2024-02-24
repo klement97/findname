@@ -19,5 +19,5 @@ APP_ENV = os.getenv('APP_ENV')
 DB_URL = os.getenv('DB_URL')
 ES_USER = os.getenv('ES_USER')
 ES_PASSWORD = os.getenv('ES_PASSWORD')
-VERIFY_CERTS = bool(int(os.getenv('VERIFY_CERTS')))
+VERIFY_CERTS = bool(int(os.getenv('VERIFY_CERTS', 0)))
 CA_CERTS = os.getenv('CA_CERTS') if VERIFY_CERTS else None
