@@ -3,7 +3,7 @@ from dataclasses import asdict
 from elasticsearch import ConflictError
 
 from src.domain.entities.vehicle_publication import VehiclePublication
-from src.domain.exceptions import PublicationError, PublicationExistsError
+from src.domain.exceptions import PublicationException, PublicationExistsException
 from src.domain.ports.repo import InsertRepoPort
 
 
@@ -17,7 +17,7 @@ class VehicleRepo(InsertRepoPort):
                 document=asdict(vp),
             )
             if response['result'] != 'created':
-                raise PublicationError(vp.id)
+                raise PublicationException(vp.id)
 
         except ConflictError:
-            raise PublicationExistsError(vp.id)
+            raise PublicationExistsException(vp.id)
