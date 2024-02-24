@@ -13,7 +13,6 @@ bad_request = partial(Hexc, status_code=HTTPStatus.BAD_REQUEST)
 EXCEPTION_MAP = {
     exc.PublicationException: lambda e: bad_request(detail=str(e)),
     exc.PublicationExistsException: lambda e: bad_request(detail=str(e)),
-    exc.UserDoesNotExist: lambda e: not_found(detail=str(e)),
     exc.UserAlreadyExistsException: lambda e: bad_request(detail=str(e)),
-    exc.PasswordIncorrectException: lambda e: bad_request(detail=str(e))
+    exc.IncorrectCredentialsException: lambda e: bad_request(detail=str(e))
 }
