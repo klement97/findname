@@ -22,6 +22,4 @@ class AiohttpHttpNode(ESAiohttpHttpNode):
 
 class Database:
     def __init__(self, address, config):
-        print(f"address: {address}")
-        print(f"config: {config}")
         self.client = AsyncElasticsearch([address], **config)
