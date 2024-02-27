@@ -10,9 +10,11 @@ class PublicationExistsException(_BaseException):
 
 
 class PublicationException(_BaseException):
-    def __init__(self, publication_id, message="Publication already exists"):
-        super().__init__(message)
+    def __init__(self, publication_id):
         self.publication_id = publication_id
+
+    def __str__(self):
+        return f"Publication with ID: {self.publication_id} already exists."
 
 
 class UserAlreadyExistsException(_BaseException):
