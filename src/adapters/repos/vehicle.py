@@ -4,10 +4,10 @@ from elasticsearch import ConflictError
 
 from src.domain.entities.vehicle_publication import VehiclePublication
 from src.domain.exceptions import PublicationException, PublicationExistsException
-from src.domain.ports.repo import InsertRepoPort
+from src.domain.ports.repo import VehicleRepoPort
 
 
-class VehicleRepo(InsertRepoPort):
+class VehicleRepo(VehicleRepoPort):
 
     async def insert(self, vp: VehiclePublication):
         try:
@@ -21,3 +21,17 @@ class VehicleRepo(InsertRepoPort):
 
         except ConflictError:
             raise PublicationExistsException(vp.id)
+
+    async def get(self, email):
+        query = {
+            "query": {
+                "term": {
+                    "publisher.email.keyword": email
+                }
+            }
+        }
+        result = await self.client.search(index=self.vehicles_index, body=query)
+        if hits := result['hits']['hits']:
+            return [
+                r["_source"] for r in hits
+            ]

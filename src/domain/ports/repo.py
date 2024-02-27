@@ -14,14 +14,17 @@ class RepoPort(ABC):
         self.client = client
 
 
-class InsertRepoPort(RepoPort, abc.ABC):
-    @abc.abstractmethod
-    async def insert(self, entity): ...
-
-
-class AuthRepoPort(InsertRepoPort, abc.ABC):
+class AuthRepoPort(RepoPort, abc.ABC):
     @abc.abstractmethod
     async def insert(self, user: User): ...
 
     @abc.abstractmethod
     async def get(self, email: str) -> User | None: ...
+
+
+class VehicleRepoPort(RepoPort, abc.ABC):
+    @abc.abstractmethod
+    async def insert(self, entity): ...
+
+    @abc.abstractmethod
+    async def get(self, email: str): ...
