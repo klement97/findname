@@ -3,7 +3,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from src.domain.entities.auth import SignupData, LoginData
 from src.domain.use_cases.auth.login import LoginUseCase
-from src.domain.use_cases.auth.read_user_info import ReadUserInfoUseCase
 from src.domain.use_cases.auth.signup import SignupUseCase
 from src.infra import dependencies as deps
 
@@ -38,11 +37,3 @@ async def login_form(
             password=login_form_data.password,
         )
     )
-
-
-@router.get("/me")
-async def me(
-        use_case: ReadUserInfoUseCase = Depends(deps.read_user_info_use_case),
-        email: str = Depends(deps.get_current_user_email)
-):
-    return await use_case.execute(email)
