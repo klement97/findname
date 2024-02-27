@@ -8,13 +8,12 @@ from jose import jwt, JWTError
 from src.adapters.repos.auth import AuthRepo
 from src.adapters.repos.vehicle import VehicleRepo
 from src.domain.use_cases.auth.login import LoginUseCase
-from src.domain.use_cases.auth.read_user_info import ReadUserInfoUseCase
 from src.domain.use_cases.auth.signup import SignupUseCase
 from src.domain.use_cases.vehicle.publish_vehicle import PublishVehicleUseCase
 from src.infra import config
 from src.infra.db import Database, AiohttpHttpNode
 
-# Using an additional /auth/login-form endpoint so we can use the class directly.
+# Using another endpoint for docs so we can use the class without modifications.
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login-form")
 
 
@@ -70,11 +69,6 @@ async def signup_use_case():
 async def login_use_case():
     repo = await auth_repo()
     return LoginUseCase(repo)
-
-
-async def read_user_info_use_case():
-    repo = await auth_repo()
-    return ReadUserInfoUseCase(repo)
 
 
 async def publish_vehicle_use_case():

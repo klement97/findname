@@ -3,8 +3,10 @@ import logging
 from fastapi import FastAPI
 from starlette.responses import JSONResponse
 
-from src.infra.routers.auth import router as auth_router
-from src.infra.routers.vehicle import router as vehicle_router
+from src.infra.routers.write.auth import router as write_auth_router
+from src.infra.routers.read.auth import router as read_auth_router
+from src.infra.routers.write.vehicle import router as write_vehicle_router
+from src.infra.routers.read.vehicle import router as read_vehicle_router
 from . import settings
 from .exception_handling import EXCEPTION_MAP
 
@@ -21,8 +23,10 @@ app = FastAPI(
     version=settings.VERSION,
     docs_url='/docs',
 )
-app.include_router(auth_router, prefix='/auth', tags=['auth'])
-app.include_router(vehicle_router, prefix='/vehicle', tags=['vehicle'])
+app.include_router(read_auth_router, prefix='/auth', tags=['Auth Read Operations'])
+app.include_router(write_auth_router, prefix='/auth', tags=['Auth Write Operations'])
+app.include_router(read_vehicle_router, prefix='/vehicle', tags=['Vehicle Read Operations'])
+app.include_router(write_vehicle_router, prefix='/vehicle', tags=['Vehicle Write Operations'])
 
 
 @app.get("/health-check")
