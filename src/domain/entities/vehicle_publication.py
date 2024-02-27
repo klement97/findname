@@ -9,6 +9,7 @@ from src.domain.entities.enums import PublisherType, VehicleType, TransmissionTy
 class Publisher:
     type: PublisherType
     full_name: str
+    email: str
     phone: str
 
 
