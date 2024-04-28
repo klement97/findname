@@ -3,10 +3,10 @@ import logging
 from fastapi import FastAPI
 from starlette.responses import JSONResponse
 
+from src.infra.routers.auth import router as auth_router
+from src.infra.routers.vehicle import router as vehicle_router
 from . import settings
 from .exception_handling import EXCEPTION_MAP
-from src.infra.routers.vehicle import router as vehicle_router
-from ..containers import container
 
 logging.basicConfig(
     level="INFO",
@@ -21,6 +21,7 @@ app = FastAPI(
     version=settings.VERSION,
     docs_url='/docs',
 )
+app.include_router(auth_router, prefix='/auth', tags=['auth'])
 app.include_router(vehicle_router, prefix='/vehicle', tags=['vehicle'])
 
 
@@ -35,8 +36,3 @@ for exception_class, handler in EXCEPTION_MAP.items():
         http_exception = _handler(exc)
         content = {'detail': http_exception.detail}
         return JSONResponse(status_code=http_exception.status_code, content=content)
-
-
-@app.on_event('startup')
-async def startup():
-    container.wire(packages=['src'])
